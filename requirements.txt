@@ -1,0 +1,2 @@
+PyDictionary==2.0.1
+googletrans==3.1.0a0
