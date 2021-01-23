@@ -85,14 +85,9 @@ def main(lang, words):
     # Get translations of synonyms
     bulk = [s for s in synonyms if s not in library or library[s] == s]
     tls = translator.translate(bulk, dest=lang)
-    """
-    The google translator occasionally stops working, probably due to the questionably reverse engineering of the library
-    This just makes it so that the library returns the original words as "translations"
-    
-    This bulk thing makes stuff a bit easier.
-    """
+
     for i in range(len(tls)):
-        library[synonyms[i]] = tls[i].text
+        library[bulk[i]] = tls[i].text
     
     write_library(lib_path, library)
     collector = {library[s] for s in synonyms}    # We only care about the translations and not their meanings.
