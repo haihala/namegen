@@ -79,6 +79,7 @@ def main(lang, words):
     synonyms = []
     for word in words:
         synonyms += dictionary.synonym(word)
+        synonyms += word    # Dictionary doesn't return the word itself
 
     synonyms = list(set(synonyms))  # Remove duplicates
 
