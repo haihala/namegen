@@ -7,6 +7,7 @@ from random import randint, normalvariate, choice, random
 from os.path import join as path_join
 from os.path import isdir, isfile
 from os import mkdir, getcwd
+import io
 
 CHUNK_MIN = 2
 CHUNK_MAX = 4
@@ -39,7 +40,7 @@ def add_space(text):
 
 def read_library(path):
     library = {}
-    with open(path, "r") as f:
+    with io.open(path, "r", encoding="utf-8") as f:
         for line in f.readlines():
             line = line.strip()
             if line:
@@ -48,7 +49,7 @@ def read_library(path):
     return library
 
 def write_library(path, library):
-    with open(path, "w") as f:
+    with io.open(path, "w", encoding="utf-8") as f:
         for key, value in library.items():
             f.write("{}:{}\n".format(key, value))
 
