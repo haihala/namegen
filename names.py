@@ -84,11 +84,15 @@ def main(lang, words):
     synonyms = list(set(synonyms))  # Remove duplicates
 
     # Get translations of synonyms
-    bulk = [s for s in synonyms if s not in library or library[s] == s]
-    tls = translator.translate(bulk, dest=lang)
+    if lang != "en":
+        bulk = [s for s in synonyms if s not in library or library[s] == s]
+        tls = translator.translate(bulk, dest=lang)
 
-    for i in range(len(tls)):
-        library[bulk[i]] = tls[i].text
+        for i in range(len(tls)):
+            library[bulk[i]] = tls[i].text
+    else:
+        for i in range(len(synonyms)):
+            library[synonyms[i]] = synonyms[i]
     
     write_library(lib_path, library)
     collector = {library[s] for s in synonyms}    # We only care about the translations and not their meanings.
